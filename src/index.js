@@ -8,7 +8,7 @@ import {default as routes} from '@/router/index'
 // process.env.NODE_ENV === 'development'
 ReactDOM.render(
   <React.StrictMode>
-    <Router>{renderRoutes(routes)}</Router>,
+    <Router>{renderRoutes(routes)}</Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
