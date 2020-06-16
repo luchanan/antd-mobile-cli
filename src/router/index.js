@@ -3,11 +3,18 @@ import { Redirect } from 'react-router'
 import App from '@/App'
 import Layout from '@/views/Layout/index'
 import NotFound from '@/views/Layout/404'
-const _import = require('@/utils/import_' + process.env.NODE_ENV).default
+import {renderAsyncComponent} from '@/components/AsyncComponent'
+import Control from '@/router/control'
+// const _import = require('@/utils/import_' + process.env.NODE_ENV).default
 const constRouters = [
   {
     component: App,
     children: [
+      {
+        path: '/403',
+        exact: true,
+        component: (props) => renderAsyncComponent(props, 'Layout/403')
+      },
       {
         path: '/404',
         exact: true,
@@ -16,7 +23,8 @@ const constRouters = [
       {
         path: '/login',
         exact: true,
-        component: _import('Login/index')
+        component: 'Login/index',
+        render: (props) => <Control {...props}/>
       },
       {
         path: '/',
@@ -24,7 +32,8 @@ const constRouters = [
         component: Layout,
         children: [{
           path: '',
-          component: _import('Home/index')
+          component: 'Home/index',
+          render: (props) => <Control {...props}/>
         }]
       },
       {
@@ -33,11 +42,13 @@ const constRouters = [
         children: [{
           path: '/account/role',
           exact: true,
-          component: _import('Account/role')
+          component: 'Account/role',
+          render: (props) => <Control {...props}/>
         }, {
           path: '/account/member/:id?',
           exact: true, // 路由完全匹配
-          component: _import('Account/member')
+          component: 'Account/member',
+          render: (props) => <Control {...props}/>
         }, {
           path: '*',
           component: () => <Redirect to='/404'/>
