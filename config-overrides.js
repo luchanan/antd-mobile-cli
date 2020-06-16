@@ -7,5 +7,9 @@ module.exports = override(
   }),
   addWebpackAlias ({
     '@': paths.appSrc
-  })
+  }),
+  (config) => {
+    config.output.publicPath = 'https://github.com/luchanan/antd-mobile-cli/build/'
+    return config
+  }
 )
