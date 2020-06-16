@@ -9,7 +9,7 @@ module.exports = override(
     '@': paths.appSrc
   }),
   (config) => {
-    config.output.publicPath = 'https://github.com/luchanan/antd-mobile-cli/build/'
+    config.output.publicPath = 'https://luchanan.github.io/antd-mobile-cli/build/'
     return config
   }
 )
