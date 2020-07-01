@@ -1,2 +1,0 @@
-(this["webpackJsonpc-react-antd"]=this["webpackJsonpc-react-antd"]||[]).push([[4],{94:function(e,t,n){"use strict";n.r(t);var a=n(0),c=n.n(a),r=n(322),s=n(39);test("renders learn react link",(function(){var e=(0,Object(r.a)(c.a.createElement(s.default,null)).getByText)(/learn react/i);expect(e).toBeInTheDocument()}))}}]);
-//# sourceMappingURL=4.eae336d1.chunk.js.map

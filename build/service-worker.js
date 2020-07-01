@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://luchanan.github.io/antd-mobile-cli/build/precache-manifest.c7e9db7ce81f80c164162dc915fc6365.js"
+  "/precache-manifest.1471be22908ea17616ef5a704e7da4e0.js"
 );
 
 self.addEventListener('message', (event) => {

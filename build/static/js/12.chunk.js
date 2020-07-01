@@ -1,0 +1,2 @@
+(this["webpackJsonpc-react-antd"]=this["webpackJsonpc-react-antd"]||[]).push([[12],{100:function(t,e,n){"use strict";n.r(e);var a=n(9),r=n(10),c=n(12),s=n(11),i=n(0),u=n.n(i),o=function(t){Object(c.a)(n,t);var e=Object(s.a)(n);function n(){return Object(a.a)(this,n),e.apply(this,arguments)}return Object(r.a)(n,[{key:"render",value:function(){return u.a.createElement("div",{className:"Member"},"Member-Route Info\uff1a",JSON.stringify(this.props.match))}}]),n}(i.Component);e.default=o}}]);
+//# sourceMappingURL=12.chunk.js.map

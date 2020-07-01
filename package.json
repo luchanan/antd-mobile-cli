@@ -8,6 +8,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd-mobile": "^2.3.3",
+    "axios": "^0.19.2",
+    "dayjs": "^1.8.28",
     "nprogress": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -16,7 +18,10 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "dotenv -e .env.native react-app-rewired start",
+    "dev": "dotenv -e .env.dev react-app-rewired build",
+    "qa": "dotenv -e .env.qa react-app-rewired build",
+    "prod": "dotenv -e .env.prod react-app-rewired build",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
@@ -39,6 +44,11 @@
   "devDependencies": {
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.1.6"
+    "dotenv-cli": "^3.1.0",
+    "http-proxy-middleware": "^1.0.4",
+    "less": "^3.11.3",
+    "less-loader": "^6.1.1",
+    "react-app-rewired": "^2.1.6",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }

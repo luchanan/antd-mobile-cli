@@ -27,8 +27,7 @@ export default class App extends React.Component {
           <Flex.Item><Link to="/account/member/36">account-member-id</Link></Flex.Item>
           <Flex.Item><Link to="/account/role">account-role</Link></Flex.Item>
           <Flex.Item><Link to="/account/member/36/404">404</Link></Flex.Item>
-          <Flex.Item><Link to="/403">403</Link></Flex.Item>
-    <Flex.Item><Button type="primary" onClick={(event) => this.auth()}>{this.state.txt}</Button></Flex.Item>
+          <Flex.Item><Button type="primary" onClick={(event) => this.auth()}>{this.state.txt}</Button></Flex.Item>
         </Flex>
         {renderRoutes(this.props.route.children)}
       </div>

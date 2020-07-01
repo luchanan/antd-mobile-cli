@@ -1,15 +1,116 @@
-const { override, fixBabelImports, addWebpackAlias } = require('customize-cra')
+const { override, fixBabelImports, addWebpackAlias, addWebpackPlugin, addBundleVisualizer, addLessLoader, setWebpackPublicPath, addWebpackModuleRule} = require('customize-cra')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const dayjs = require('dayjs')
+const webpack = require('webpack')
 const { paths } = require('react-app-rewired')
-module.exports = override(
-  fixBabelImports('import', {
-    libraryName: 'antd-mobile',
-    style: 'css',
-  }),
-  addWebpackAlias ({
-    '@': paths.appSrc
-  }),
-  (config) => {
-    config.output.publicPath = 'https://luchanan.github.io/antd-mobile-cli/build/'
-    return config
+const path = require('path')
+const fs = require('fs')
+const select = fs.readFileSync('./conf/select.js', 'utf8')
+let timeStamp = process.env.npm_config_appversion || dayjs().format('YYMMDD')
+const removeConsole = () => {
+  return (config) => {
+    if(config.optimization.minimizer){
+      config.optimization.minimizer.forEach( (minimizer) => {
+        if( minimizer.constructor.name === 'TerserPlugin'){
+          // minimizer.options.terserOptions.compress.drop_console = true // 包括log，error, warn等
+          minimizer.options.terserOptions.compress.pure_funcs = ['console.log']
+        }
+      })       
+    }
+    return config;
   }
-)
+}
+const replaceOutputName = () => (config) => {
+  config.output.filename = 'static/js/[name].js'; // static/js/[name].[contenthash:8].js
+  config.output.chunkFilename = 'static/js/[name].chunk.js'; // static/js/[name].[contenthash:8].chunk.js
+  // change MiniCssExtractPlugin
+  config.plugins = config.plugins.filter(
+    p => p.constructor.name !== 'MiniCssExtractPlugin',
+  );
+  config.plugins.push(new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: 'static/css/[name].css',
+    chunkFilename: 'static/css/[name].chunk.css'
+  }));
+  // Media and Assets Overrides
+  config.module.rules[2].oneOf = config.module.rules[2].oneOf.map((one) => {
+    if (one.options && one.options.name) {
+      one.options.name = 'static/media/[name].[ext]';
+    }
+    return one;
+  });
+  // 只改了.less文件
+  // config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: 'fefefef'}
+  // console.log(config.module.rules[2].oneOf[7].use)
+  // 单独设置
+  // config.module.rules[2].oneOf.splice(0,1,{
+  //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+  //   use: [{
+  //       loader: require.resolve('url-loader'),
+  //       options: {
+  //         limit: 10000,
+  //         name: 'static/images/[name].[hash:8].[ext]'
+  //       }
+  //   }]
+  // });
+  return config;
+}
+module.exports = {
+  webpack: override(
+    process.env.NODE_ENV === 'production' && addWebpackModuleRule(
+      {
+        test: /\.(sa|sc|le|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          'css-loader'
+        ]
+      }
+    ),
+    fixBabelImports('import', {
+      libraryName: 'antd-mobile',
+      style: 'css'
+    }),
+    addWebpackAlias ({
+      '@': paths.appSrc
+    }),
+    addLessLoader({
+      lessOptions: {
+        javascriptEnabled: true,
+        modifyVars: {
+          'hack': `true; @import "~@/assets/less/var.less";`
+        }
+      }
+    }),
+    addWebpackPlugin(
+      new webpack.DefinePlugin({
+        'APPVERSION': timeStamp
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'public/index.html',
+        inject: true,
+        title: 'add title',
+        ejs: select
+      })
+    ),
+    (config, env) => {
+      return config
+    },
+    removeConsole(),
+    addBundleVisualizer({}, true),
+    replaceOutputName(),
+    // setWebpackPublicPath('http://wwww.abc.com')
+  ),
+  //  for development or production.
+  paths: function(paths, env) {
+    paths.appBuild = path.resolve(__dirname, 'build')
+    return paths;
+  }
+}

@@ -1,0 +1,2 @@
+(this["webpackJsonpc-react-antd"]=this["webpackJsonpc-react-antd"]||[]).push([[7],{639:function(t,c){},641:function(t,c){},96:function(t,c,a){var e=a(623).createProxyMiddleware;t.exports=function(t){t.use("/tm/api",e({target:"https://www.easy-mock.com/mock/5d11904204f0047bfd1c9bc3/tm/api",pathRewrite:{"^/tm/api":"/"},changeOrigin:!0}))}}}]);
+//# sourceMappingURL=7.chunk.js.map
