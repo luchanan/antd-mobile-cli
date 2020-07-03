@@ -1,2 +1,0 @@
-(this["webpackJsonpc-react-antd"]=this["webpackJsonpc-react-antd"]||[]).push([[13],{101:function(e,t,n){"use strict";n.r(t);var a=n(9),c=n(10),r=n(12),s=n(11),u=n(0),i=n.n(u),o=function(e){Object(r.a)(n,e);var t=Object(s.a)(n);function n(){return Object(a.a)(this,n),t.apply(this,arguments)}return Object(c.a)(n,[{key:"render",value:function(){return i.a.createElement("div",{className:"Role"},"Role")}}]),n}(u.Component);t.default=o}}]);
-//# sourceMappingURL=13.chunk.js.map

@@ -31,6 +31,7 @@
       //   if (isPc()) {window.location.href='./index.html'}
       // <% } %>
     </script>
+    <!-- <script type="text/javascript" src="%PUBLIC_URL%/conf/index.js"></script> -->
     <title>React App</title>
   </head>
   <body>
@@ -46,8 +47,9 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script type="text/javascript" src="./conf/index.js?appVersion=<%=compilation.hash%>"></script>
     <script>
-       <%= htmlWebpackPlugin.options.ocs %>
+       <%= htmlWebpackPlugin.options.ejs %>
     </script>
   </body>
 </html>

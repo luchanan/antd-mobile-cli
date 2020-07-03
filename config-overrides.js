@@ -1,6 +1,8 @@
-const { override, fixBabelImports, addWebpackAlias, addWebpackPlugin, addBundleVisualizer, addLessLoader, setWebpackPublicPath, addWebpackModuleRule} = require('customize-cra')
+const { override, fixBabelImports, addWebpackAlias, addWebpackPlugin, addBundleVisualizer, addLessLoader, setWebpackPublicPath, addWebpackModuleRule, overrideDevServer, addPostcssPlugins} = require('customize-cra')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const rewireHtmlWebpackPlugin = require('react-app-rewire-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dayjs = require('dayjs')
 const webpack = require('webpack')
 const { paths } = require('react-app-rewired')
@@ -20,6 +22,12 @@ const removeConsole = () => {
     }
     return config;
   }
+}
+const addWebpackPlugins = (plugins = []) => (config) => {
+  for (let val of plugins) {
+    config.plugins.push(val)
+  }
+  return config
 }
 const replaceOutputName = () => (config) => {
   config.output.filename = 'static/js/[name].js'; // static/js/[name].[contenthash:8].js
@@ -57,6 +65,19 @@ const replaceOutputName = () => (config) => {
   // });
   return config;
 }
+const removeHtmlWebpackPlugin = () => (config) => {
+  // copy原来的配置， 再删除, react-app-rewire-html-webpack-plugin代替此处
+  const htmlWebpackPluginOptions = config.plugins.find(
+    plugin => plugin.constructor.name === 'HtmlWebpackPlugin'
+  )
+  htmlWebpackPluginOptions.options = {...htmlWebpackPluginOptions.options, ...{
+    ejs: select
+  }}
+  return config
+  // htmlWebpackPluginOptions = config.plugins[index].options
+  // console.log(htmlWebpackPluginOptions)
+  // config.plugins.splice(index, 1)
+}
 module.exports = {
   webpack: override(
     process.env.NODE_ENV === 'production' && addWebpackModuleRule(
@@ -77,6 +98,11 @@ module.exports = {
       libraryName: 'antd-mobile',
       style: 'css'
     }),
+    addPostcssPlugins([
+      require('postcss-px-to-viewport')({
+        viewportWidth: 375
+      })
+    ]),
     addWebpackAlias ({
       '@': paths.appSrc
     }),
@@ -88,21 +114,27 @@ module.exports = {
         }
       }
     }),
-    addWebpackPlugin(
+    addWebpackPlugins([
       new webpack.DefinePlugin({
         'APPVERSION': timeStamp
       }),
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'public/index.html',
-        inject: true,
+      // new HtmlWebpackPlugin({
+      //   filename: 'index.html',
+      //   template: 'public/index.html',
+      //   inject: true,
+      //   title: 'add title',
+      //   ejs: select
+      // }),
+      new CopyWebpackPlugin({patterns: [{from: 'conf/**'}]})
+    ]),
+    (config, env) => {
+      rewireHtmlWebpackPlugin(config, env, {
         title: 'add title',
         ejs: select
       })
-    ),
-    (config, env) => {
       return config
     },
+    // removeHtmlWebpackPlugin(),
     removeConsole(),
     addBundleVisualizer({}, true),
     replaceOutputName(),
@@ -112,5 +144,10 @@ module.exports = {
   paths: function(paths, env) {
     paths.appBuild = path.resolve(__dirname, 'build')
     return paths;
-  }
+  },
+  devServer: overrideDevServer(
+    (config, env) => {
+      return config
+    }
+  )
 }
