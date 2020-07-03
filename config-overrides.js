@@ -98,14 +98,6 @@ module.exports = {
       libraryName: 'antd-mobile',
       style: 'css'
     }),
-    addPostcssPlugins([
-      require('postcss-px-to-viewport')({
-        viewportWidth: 375
-      })
-    ]),
-    addWebpackAlias ({
-      '@': paths.appSrc
-    }),
     addLessLoader({
       lessOptions: {
         javascriptEnabled: true,
@@ -114,6 +106,15 @@ module.exports = {
         }
       }
     }),
+    addPostcssPlugins([
+      require('postcss-px-to-viewport')({
+        viewportWidth: 375
+      })
+    ]),
+    addWebpackAlias ({
+      '@': paths.appSrc
+    }),
+    
     addWebpackPlugins([
       new webpack.DefinePlugin({
         'APPVERSION': timeStamp
