@@ -1,5 +1,7 @@
 const { override, fixBabelImports, addWebpackAlias, addWebpackPlugin, addBundleVisualizer, addLessLoader, setWebpackPublicPath, addWebpackModuleRule, overrideDevServer, addPostcssPlugins} = require('customize-cra')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReplacePlugin = require('webpack-plugin-replace')
+const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin')
 const rewireHtmlWebpackPlugin = require('react-app-rewire-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -49,9 +51,9 @@ const replaceOutputName = () => (config) => {
     }
     return one;
   });
-  // 只改了.less文件
-  // config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: 'fefefef'}
-  // console.log(config.module.rules[2].oneOf[7].use)
+  // .css文件url路径，只改了.less文件
+  config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: 'fefefef'}
+  console.log(config.module.rules[2].oneOf[7].use)
   // 单独设置
   // config.module.rules[2].oneOf.splice(0,1,{
   //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -82,7 +84,7 @@ module.exports = {
   webpack: override(
     process.env.NODE_ENV === 'production' && addWebpackModuleRule(
       {
-        test: /\.(sa|sc|le|c)ss$/,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -108,7 +110,8 @@ module.exports = {
     }),
     addPostcssPlugins([
       require('postcss-px-to-viewport')({
-        viewportWidth: 375
+        viewportWidth: 375,
+        exclude: /(\/|\\)(node_modules)(\/|\\)/
       })
     ]),
     addWebpackAlias ({
@@ -126,8 +129,23 @@ module.exports = {
       //   title: 'add title',
       //   ejs: select
       // }),
+      new ReplacePlugin({
+        values: {
+          'CSSREPLACE': 'px'
+        }
+      }),
       new CopyWebpackPlugin({patterns: [{from: 'conf/**'}]})
     ]),
+    // process.env.NODE_ENV === 'production' && addWebpackPlugin(
+    //   new ReplaceInFileWebpackPlugin([{
+    //     dir: paths.appBuild,
+    //     test: [/\.css$/, /\.js$/],
+    //     rules: [{
+    //       search: /"JSREPLACE"/g,
+    //       replace: 'window.REPLACED'
+    //     }]
+    //   }])
+    // ),
     (config, env) => {
       rewireHtmlWebpackPlugin(config, env, {
         title: 'add title',

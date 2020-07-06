@@ -1,0 +1,1 @@
+window.Flag = 1

@@ -52,6 +52,8 @@
     "postcss-px-to-viewport": "^1.1.1",
     "react-app-rewire-html-webpack-plugin": "^1.0.1",
     "react-app-rewired": "^2.1.6",
-    "webpack-bundle-analyzer": "^3.8.0"
+    "replace-in-file-webpack-plugin": "^1.0.6",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-plugin-replace": "^1.2.0"
   }
 }
