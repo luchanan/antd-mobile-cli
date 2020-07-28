@@ -2,6 +2,7 @@ const { override, fixBabelImports, addWebpackAlias, addWebpackPlugin, addBundleV
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReplacePlugin = require('webpack-plugin-replace')
 const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin')
 const rewireHtmlWebpackPlugin = require('react-app-rewire-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -51,9 +52,11 @@ const replaceOutputName = () => (config) => {
     }
     return one;
   });
-  // .css文件url路径，只改了.less文件
-  config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: 'fefefef'}
-  console.log(config.module.rules[2].oneOf[7].use)
+  // ②less文件url路径
+  config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: 'fefefef1'}
+  // ②css文件url路径
+  config.module.rules[2].oneOf[3].use[0].options = {...config.module.rules[2].oneOf[3].use[0].options, publicPath: 'fefefef2'}
+  console.log(config.module.rules[2].oneOf[3])
   // 单独设置
   // config.module.rules[2].oneOf.splice(0,1,{
   //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -82,20 +85,22 @@ const removeHtmlWebpackPlugin = () => (config) => {
 }
 module.exports = {
   webpack: override(
-    process.env.NODE_ENV === 'production' && addWebpackModuleRule(
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../'
-            }
-          },
-          'css-loader'
-        ]
-      }
-    ),
+    // 废弃， 采用②
+    // ①
+    // process.env.NODE_ENV === 'production' && addWebpackModuleRule(
+    //   {
+    //     test: /\.css$/,
+    //     use: [
+    //       {
+    //         loader: MiniCssExtractPlugin.loader,
+    //         options: {
+    //           publicPath: '../'
+    //         }
+    //       },
+    //       'css-loader'
+    //     ]
+    //   }
+    // ),
     fixBabelImports('import', {
       libraryName: 'antd-mobile',
       style: 'css'
@@ -134,7 +139,15 @@ module.exports = {
           'CSSREPLACE': 'px'
         }
       }),
-      new CopyWebpackPlugin({patterns: [{from: 'conf/**'}]})
+      new CopyWebpackPlugin({patterns: [{from: 'conf/**'}]}),
+      process.env.NODE_ENV === 'production' && new FileManagerPlugin({
+        onEnd: {
+          mkdir: [`./tar`]
+        },
+        archive: [
+          { source: './dist', destination: './tar/abc.zip' }
+        ]
+      })
     ]),
     // process.env.NODE_ENV === 'production' && addWebpackPlugin(
     //   new ReplaceInFileWebpackPlugin([{
