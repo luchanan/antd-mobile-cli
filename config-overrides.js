@@ -142,11 +142,24 @@ module.exports = {
       new CopyWebpackPlugin({patterns: [{from: 'conf/**'}]}),
       process.env.NODE_ENV === 'production' && new FileManagerPlugin({
         onEnd: {
-          mkdir: [`./tar`]
-        },
-        archive: [
-          { source: './dist', destination: './tar/abc.zip' }
-        ]
+          mkdir: [`./tar`],
+          archive: [
+            {
+              source: `${path.resolve(__dirname, 'build')}`,
+              destination: `./tar/build.tar.gz`,
+              format: 'tar',
+              options: {
+                gzip: true,
+                gzipOptions: {
+                  level: 9
+                },
+                globOptions: {
+                  nomount: true
+                }
+              }
+            }
+          ]
+        }
       })
     ]),
     // process.env.NODE_ENV === 'production' && addWebpackPlugin(
