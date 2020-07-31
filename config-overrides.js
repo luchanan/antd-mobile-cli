@@ -53,10 +53,10 @@ const replaceOutputName = () => (config) => {
     return one;
   });
   // ②less文件url路径
-  config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: 'fefefef1'}
+  config.module.rules[2].oneOf[7].use[0].options = {...config.module.rules[2].oneOf[7].use[0].options, publicPath: '../../'}
   // ②css文件url路径
-  config.module.rules[2].oneOf[3].use[0].options = {...config.module.rules[2].oneOf[3].use[0].options, publicPath: 'fefefef2'}
-  console.log(config.module.rules[2].oneOf[3])
+  config.module.rules[2].oneOf[3].use[0].options = {...config.module.rules[2].oneOf[3].use[0].options, publicPath: '../../'}
+  console.log(config.module.rules[2])
   // 单独设置
   // config.module.rules[2].oneOf.splice(0,1,{
   //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -140,7 +140,7 @@ module.exports = {
         }
       }),
       new CopyWebpackPlugin({patterns: [{from: 'conf/**'}]}),
-      process.env.NODE_ENV === 'production' && new FileManagerPlugin({
+      process.env.NODE_ENV === 'production' ? new FileManagerPlugin({
         onEnd: {
           mkdir: [`./tar`],
           archive: [
@@ -160,7 +160,7 @@ module.exports = {
             }
           ]
         }
-      })
+      }) : () => {} // 防止npm run start错误
     ]),
     // process.env.NODE_ENV === 'production' && addWebpackPlugin(
     //   new ReplaceInFileWebpackPlugin([{
