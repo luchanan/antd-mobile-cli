@@ -8,31 +8,31 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/conf/select.js"
   },
   {
-    "revision": "fafe865c1b1c92e61db458770b62c6b3",
+    "revision": "8a403593e6891c77b6c9d9e537efa83f",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/index.html"
   },
   {
-    "revision": "ceed544d588eb5d9e63b",
+    "revision": "eb5c8b89a9b43aa2a4d2",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/css/1.chunk.css"
   },
   {
-    "revision": "d1e8552c62f126c8a3f5",
+    "revision": "e06b6467eef081c9145c",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/css/17.chunk.css"
   },
   {
-    "revision": "44a971709a1b4a50e815",
+    "revision": "7ab81252abef1165886f",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/css/18.chunk.css"
   },
   {
-    "revision": "635b0f3dc6da343b46db",
+    "revision": "e0fbe2bd7f51cc91b3fa",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/css/19.chunk.css"
   },
   {
-    "revision": "6a8eece84d772fccd00d",
+    "revision": "5e1954530ec73f2dc47d",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/css/20.chunk.css"
   },
   {
-    "revision": "0a070d84b45e655a1c94",
+    "revision": "7ec9a2c21b4a4a597cca",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/css/main.chunk.css"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/0.chunk.js"
   },
   {
-    "revision": "ceed544d588eb5d9e63b",
+    "revision": "eb5c8b89a9b43aa2a4d2",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/1.chunk.js"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/14.chunk.js"
   },
   {
-    "revision": "d1e8552c62f126c8a3f5",
+    "revision": "e06b6467eef081c9145c",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/17.chunk.js"
   },
   {
@@ -72,11 +72,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/17.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "44a971709a1b4a50e815",
+    "revision": "7ab81252abef1165886f",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/18.chunk.js"
   },
   {
-    "revision": "635b0f3dc6da343b46db",
+    "revision": "e0fbe2bd7f51cc91b3fa",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/19.chunk.js"
   },
   {
@@ -84,7 +84,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/2.chunk.js"
   },
   {
-    "revision": "6a8eece84d772fccd00d",
+    "revision": "5e1954530ec73f2dc47d",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/20.chunk.js"
   },
   {
@@ -120,7 +120,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/3.chunk.js"
   },
   {
-    "revision": "79006d1222b90d3ab10f",
+    "revision": "2d1a4d3f3d433c53ef07",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/4.chunk.js"
   },
   {
@@ -128,7 +128,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "df60d6f3602c7600742f",
+    "revision": "681d6fb557a46b28264e",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/5.chunk.js"
   },
   {
@@ -136,7 +136,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "daabcb83186441a4c102",
+    "revision": "3517e05cb898a8ed60db",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/6.chunk.js"
   },
   {
@@ -156,7 +156,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/9.chunk.js"
   },
   {
-    "revision": "0a070d84b45e655a1c94",
+    "revision": "7ec9a2c21b4a4a597cca",
     "url": "https://luchanan.github.io/antd-mobile-cli/build/static/js/main.chunk.js"
   },
   {

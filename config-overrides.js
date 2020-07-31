@@ -184,7 +184,8 @@ module.exports = {
     removeConsole(),
     addBundleVisualizer({}, true),
     replaceOutputName(),
-    process.env.REACT_APP_DETAIL_ENV === 'prod' ?setWebpackPublicPath('https://luchanan.github.io/antd-mobile-cli/build/'): () => {}
+    // ③, 当②与同时开启，且env没有定义PUBLIC_URL时，css内url被②覆盖，且index.html的PUBLIC_URL未被代替
+    // process.env.REACT_APP_DETAIL_ENV === 'prod' ? setWebpackPublicPath('https://luchanan.github.io/antd-mobile-cli/build/'): () => {} // index.html的PUBLIC_URL需要在env配置
   ),
   //  for development or production.
   paths: function(paths, env) {

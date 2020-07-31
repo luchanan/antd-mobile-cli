@@ -1,1 +1,0 @@
-{"version":3,"sources":["components/Icon/iconfont.woff2"],"names":["module","exports"],"mappings":"wGAAAA,EAAOC,QAAU,IAA0B","file":"static/js/25.chunk.js","sourcesContent":["module.exports = __webpack_public_path__ + \"static/media/iconfont.woff2\";"],"sourceRoot":""}
