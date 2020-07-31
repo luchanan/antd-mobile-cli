@@ -177,13 +177,14 @@ module.exports = {
         title: 'add title',
         ejs: select
       })
+      // config.output.publicPath = 'https://luchanan.github.io/antd-mobile-cli/build/'
       return config
     },
     // removeHtmlWebpackPlugin(),
     removeConsole(),
     addBundleVisualizer({}, true),
     replaceOutputName(),
-    // setWebpackPublicPath('http://wwww.abc.com')
+    process.env.REACT_APP_DETAIL_ENV === 'prod' ?setWebpackPublicPath('https://luchanan.github.io/antd-mobile-cli/build/'): () => {}
   ),
   //  for development or production.
   paths: function(paths, env) {
